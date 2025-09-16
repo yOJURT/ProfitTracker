@@ -1,7 +1,6 @@
 package DatabaseService
 
 import (
-	"context"
 	"log"
 	"os"
 
@@ -9,7 +8,11 @@ import (
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
-func getMongoClient() *mongo.Client {
+type DBConnection struct {
+	Client *mongo.Client
+}
+
+func SetMongoClient() *DBConnection {
 	uri := os.Getenv("MONGODB_URI")
 	docs := "www.mongodb.com/docs/drivers/go/current/"
 	if uri == "" {
@@ -18,17 +21,11 @@ func getMongoClient() *mongo.Client {
 			"usage-examples/#environment-variable")
 	}
 
-	client, err := mongo.Connect(options.Client().
-		ApplyURI(uri))
+	client, err := mongo.Connect(options.Client().ApplyURI(uri))
+
 	if err != nil {
 		panic(err)
 	}
 
-	defer func() {
-		if err := client.Disconnect(context.TODO()); err != nil {
-			panic(err)
-		}
-	}()
-
-	return client
+	return &DBConnection{Client: client}
 }
