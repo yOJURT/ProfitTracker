@@ -1,10 +1,17 @@
 package main
 
 import (
-	//"profit-tracker-go/DatabaseService"
-	"fmt"
+	Interface "profit-tracker-go/Interfaces"
 )
 
 func main() {
-	fmt.Print("Hello, World!")
+
+	for {
+		result := Interface.GetUserInput()
+		if result == "4. Exit" {
+			break
+		} else {
+			//TODO: Call and write parser to handle user selection
+		}
+	}
 }
