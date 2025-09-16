@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
+import (
+	//"profit-tracker-go/DatabaseService"
+	"fmt"
+)
 
 func main() {
-	fmt.Println("This will be cool eventually lol")
+	fmt.Print("Hello, World!")
 }
