@@ -1,4 +1,4 @@
-package DatabaseService
+package DataServices
 
 import (
 	"log"
