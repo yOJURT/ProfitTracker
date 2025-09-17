@@ -1,39 +1,46 @@
 package Interfaces
 
 import (
+	DataStructures "profit-tracker-go/DataStructures"
 	"strings"
 
 	"github.com/manifoldco/promptui"
 )
 
 type Prompt struct {
-	prompt *promptui.Select
+	PathStack *DataStructures.Stack
+	prompt    *promptui.Select
 }
 
-func RunPrompt(prompt string) string {
-	if prompt != "Main Menu" {
+func RunPrompt(prompt string, p *Prompt) string {
+
+	var PromptToRun Prompt
+	//TODO: Make this cleaner
+	if prompt != "0. Main Menu" {
 		prompt = strings.Split(prompt, ". ")[1]
 	}
 
-	var PromptToRun Prompt
-
 	switch prompt {
+	case "0. Main Menu":
+		PromptToRun = Prompt{
+			prompt: GetMainMenuInput(),
+		}
 	case "Settings":
 		PromptToRun = Prompt{
 			prompt: GetSettingsInput(),
-		}
-	case "Main Menu", "Prev":
-		PromptToRun = Prompt{
-			prompt: GetMainMenuInput(),
 		}
 	case "View Data":
 		PromptToRun = Prompt{
 			prompt: GetViewDataInput(),
 		}
-
 	case "Insert Data":
 		PromptToRun = Prompt{
 			prompt: GetInsertDataInput(),
+		}
+
+	case "View Total Win/Loss Amount":
+		PromptToRun = Prompt{
+			prompt: GetTestInput(),
 		}
 	}
 
@@ -41,6 +48,11 @@ func RunPrompt(prompt string) string {
 
 	if err != nil {
 		panic(err)
+	}
+
+	if strings.Split(result, ". ")[1] == "Prev" {
+		p.PathStack.Pop()
+		return p.PathStack.Peek()
 	}
 
 	return result
