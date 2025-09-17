@@ -1,0 +1,1 @@
+{"Database Settings":{"uri" : "mongodb://localhost:27017/", "Database": "ProfitTracker","Collection":"Sessions"}}
