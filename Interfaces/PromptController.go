@@ -37,11 +37,6 @@ func RunPrompt(prompt string, p *Prompt) string {
 		PromptToRun = Prompt{
 			prompt: GetInsertDataInput(),
 		}
-
-	case "View Total Win/Loss Amount":
-		PromptToRun = Prompt{
-			prompt: GetTestInput(),
-		}
 	}
 
 	_, result, err := PromptToRun.prompt.Run()
@@ -52,7 +47,7 @@ func RunPrompt(prompt string, p *Prompt) string {
 
 	if strings.Split(result, ". ")[1] == "Prev" {
 		p.PathStack.Pop()
-		return p.PathStack.Peek()
+		return p.PathStack.Pop()
 	}
 
 	return result

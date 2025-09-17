@@ -15,14 +15,3 @@ func GetViewDataInput() *promptui.Select {
 
 	return &prompt
 }
-
-func GetTestInput() *promptui.Select {
-	prompt := promptui.Select{
-		Label:        "Select an option",
-		Items:        []string{"1. Test", "2. Work", "3. Prev"},
-		HideHelp:     true,
-		HideSelected: true,
-	}
-
-	return &prompt
-}
