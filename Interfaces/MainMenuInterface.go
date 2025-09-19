@@ -4,11 +4,11 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
-func GetMainMenuInput() *promptui.Select {
+func GetMainMenuInput(items []string) *promptui.Select {
 
 	prompt := promptui.Select{
 		Label:        "Select an option",
-		Items:        []string{"1. View Data", "2. Insert Data", "3. Settings", "4. Exit"},
+		Items:        items,
 		HideHelp:     true,
 		HideSelected: true,
 	}
