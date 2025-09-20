@@ -1,35 +1,27 @@
 package main
 
 import (
-	//"context"
-	//DBService "profit-tracker-go/DataServices"
-
-	DataStructures "profit-tracker-go/DataStructures"
 	Interface "profit-tracker-go/Interfaces"
+	worker "profit-tracker-go/worker"
 	"strings"
 )
 
 func main() {
-	//mongoClient := DBService.SetMongoClient()
-
-	//defer mongoClient.Client.Disconnect(context.Background())
-	prompt := Interface.Prompt{
-		PathStack: DataStructures.CreateStack(),
-	}
-
+	Interface.ClearScreen()
+	pointers := worker.Run()
 	result := "0. Main Menu"
 	for {
-		if prompt.PathStack.Len() == 0 {
-			prompt.PathStack.Push(result)
+		if pointers.PathStack.Len() == 0 {
+			pointers.PathStack.Push(result)
 		}
 
-		result = Interface.RunPrompt(result, &prompt)
+		result = Interface.RunPrompt(result, pointers)
 
-		if strings.Split(result, ". ")[1] != "Prev" {
-			prompt.PathStack.Push(result)
+		if strings.Split(result, ". ")[1] != "Prev" || strings.Split(result, ". ")[1] != "Main Menu" {
+			pointers.PathStack.Push(result)
 		}
 
-		if result == "4. Exit" {
+		if result == "5. Exit" {
 			break
 		}
 	}

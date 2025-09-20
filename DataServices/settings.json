@@ -1,1 +1,5 @@
-{"Database Settings":{"uri" : "mongodb://localhost:27017/", "Database": "ProfitTracker","Collection":"Sessions"}}
+{
+ "ConnectionString": "mongodb://localhost:27017/",
+ "DatabaseName": "local",
+ "CollectionName": "Sessions"
+}
