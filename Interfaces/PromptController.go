@@ -114,6 +114,12 @@ func RunPrompt(prompt string, p *worker.PointersToUse) string {
 		DataServices.GetAllDocuments(p.MongoCollection)
 		ClearScreen()
 		return "0. Main Menu"
+
+	case "View Total Win/Loss Amount":
+		ClearScreen()
+		DataServices.GetTotalWinLoss(p.MongoCollection)
+		ClearScreen()
+		return "0. Main Menu"
 	}
 
 	_, result, err := PromptToRun.prompt.Run()
